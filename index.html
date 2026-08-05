@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cung Trời Hóa Lạc - Mobile</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.95);
+            --text-color: #e5e7eb;
+            --accent-gold: #fbbf24;
+            --energy-color: #3b82f6;
+            --virtue-color: #10b981;
+            --sin-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b, #31103f);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin: 0 0 5px 0;
+            text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+        }
+
+        header p {
+            color: #9ca3af;
+            font-size: 0.85rem;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .tube-container {
+            margin-bottom: 12px;
+        }
+
+        .tube-container:last-child {
+            margin-bottom: 0;
+        }
+
+        .tube-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .tube-bar {
+            width: 100%;
+            height: 20px;
+            background: #1f2937;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .tube-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        #energy-fill { background: linear-gradient(90deg, #1d4ed8, var(--energy-color)); }
+        #virtue-fill { background: linear-gradient(90deg, #047857, var(--virtue-color)); }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .action-grid button:nth-child(3),
+        .action-grid button:nth-child(4),
+        .action-grid button:last-child {
+            grid-column: span 2;
+        }
+
+        button {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: transform 0.1s ease, border-color 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        .btn-virtue { border-left: 4px solid var(--virtue-color); }
+        .btn-sin { border-left: 4px solid var(--sin-color); }
+        .btn-reset { border-left: 4px solid var(--sin-color); background: #7f1d1d; }
+
+        /* Modal Styles Mobile Friendly */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #111827;
+            border-top: 2px solid var(--accent-gold);
+            padding: 20px 15px;
+            border-radius: 20px 20px 0 0;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            color: #9ca3af;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        h3 { 
+            color: var(--accent-gold); 
+            margin-top: 0; 
+            font-size: 1.1rem;
+            padding-right: 30px;
+        }
+
+        ul { padding-left: 18px; font-size: 0.85rem; }
+        li { margin-bottom: 6px; }
+
+        .custom-item {
+            background: #1f2937;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .custom-item input {
+            width: 100%;
+            background: #374151;
+            border: 1px solid #4b5563;
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Cung Trời Hóa Lạc</h1>
+        <p>Phiên bản tối ưu cho di động</p>
+    </header>
+
+    <div class="card">
+        <!-- Ống Năng Lượng -->
+        <div class="tube-container">
+            <div class="tube-info">
+                <span>Năng Lượng Thiên Giới</span>
+                <span id="energy-text">0 / 10.000...</span>
+            </div>
+            <div class="tube-bar">
+                <div class="tube-fill" id="energy-fill"></div>
+            </div>
+        </div>
+
+        <!-- Ống Phước Đức -->
+        <div class="tube-container">
+            <div class="tube-info">
+                <span>Phước Đức</span>
+                <span id="virtue-text">0 / 10.000...</span>
+            </div>
+            <div class="tube-bar">
+                <div class="tube-fill" id="virtue-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bảng Nút Chức Năng -->
+    <div class="action-grid">
+        <button class="btn-virtue" onclick="openModal('virtueModal')">🌟 Làm Việc Thiện</button>
+        <button class="btn-sin" onclick="openModal('sinModal')">⚡ Làm Việc Ác</button>
+        <button onclick="openModal('guideModal')">📖 Hướng Dẫn & Danh Sách</button>
+        <button onclick="openModal('rulesModal')">📜 Luật Cấm Cung Trời</button>
+        <button class="btn-virtue" onclick="openModal('customVirtueModal')">⚙️ Tùy Chỉnh Thiện</button>
+        <button class="btn-sin" onclick="openModal('customSinModal')">⚙️ Tùy Chỉnh Ác</button>
+        <button class="btn-reset" onclick="resetAll()">🔄 Reset Lại</button>
+    </div>
+</div>
+
+<!-- MODAL: Việc Thiện -->
+<div id="virtueModal" class="modal" onclick="checkClose(event, 'virtueModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('virtueModal')">&times;</span>
+        <h3>Chọn Việc Thiện</h3>
+        <div id="virtue-buttons-list"></div>
+    </div>
+</div>
+
+<!-- MODAL: Việc Ác -->
+<div id="sinModal" class="modal" onclick="checkClose(event, 'sinModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('sinModal')">&times;</span>
+        <h3>Chọn Việc Ác</h3>
+        <div id="sin-buttons-list"></div>
+    </div>
+</div>
+
+<!-- MODAL: Hướng Dẫn -->
+<div id="guideModal" class="modal" onclick="checkClose(event, 'guideModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('guideModal')">&times;</span>
+        <h3>Hướng Dẫn 20 Việc Thiện & Ác</h3>
+        <p style="color: var(--accent-gold); font-weight: bold; font-size: 0.9rem;">20 Việc Thiện:</p>
+        <ul id="guide-virtue-list"></ul>
+        <p style="color: var(--sin-color); font-weight: bold; font-size: 0.9rem; margin-top: 15px;">20 Việc Ác:</p>
+        <ul id="guide-sin-list"></ul>
+    </div>
+</div>
+
+<!-- MODAL: Luật Cấm -->
+<div id="rulesModal" class="modal" onclick="checkClose(event, 'rulesModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('rulesModal')">&times;</span>
+        <h3>Luật Cấm Tại Cung Trời Hóa Lạc</h3>
+        <ul>
+            <li>Không khởi tâm sân hận, oán thù phá hủy năng lượng thanh tịnh.</li>
+            <li>Không làm tổn hại đến phước đức đã tích lũy.</li>
+            <li>Cấm hủy hoại kinh sách, giáo pháp dưới mọi hình thức.</li>
+            <li>Giữ gìn tâm ý luôn hoan hỉ, tự tại đúng chất chư thiên.</li>
+            <li>Tuyệt đối không để ống năng lượng hoặc phước đức cạn kiệt.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- MODAL: Tùy chỉnh việc thiện -->
+<div id="customVirtueModal" class="modal" onclick="checkClose(event, 'customVirtueModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('customVirtueModal')">&times;</span>
+        <h3>Tùy Chỉnh Việc Thiện</h3>
+        <div id="custom-virtue-list"></div>
+    </div>
+</div>
+
+<!-- MODAL: Tùy chỉnh việc ác -->
+<div id="customSinModal" class="modal" onclick="checkClose(event, 'customSinModal')">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('customSinModal')">&times;</span>
+        <h3>Tùy Chỉnh Việc Ác</h3>
+        <div id="custom-sin-list"></div>
+    </div>
+</div>
+
+<script>
+    const MAX_VAL = 10000000000000000000000n; // 10.000.000.000.000.000.000.000
+
+    let state = {
+        energy: 0n,
+        virtue: 0n,
+        virtues: [
+            { name: "1. Giúp người qua đường", value: 1000000000000000000n },
+            { name: "2. Cứu động vật nhỏ", value: 5000000000000000000n },
+            { name: "3. Phóng sinh sinh vật", value: 10000000000000000000n },
+            { name: "4. Chia sẻ thức ăn", value: 20000000000000000000n },
+            { name: "5. Tặng quà người nghèo", value: 50000000000000000000n },
+            { name: "6. Trồng cây xanh", value: 100000000000000000000n },
+            { name: "7. Giúp đỡ người già", value: 200000000000000000000n },
+            { name: "8. Tình nguyện viên", value: 500000000000000000000n },
+            { name: "9. Dọn dẹp đường phố", value: 1000000000000000000000n },
+            { name: "10. Cúng dường tịnh tài", value: 2000000000000000000000n },
+            { name: "11. In ấn kinh sách", value: 5000000000000000000000n },
+            { name: "12. Giảng dạy điều hay", value: 10000000000000000000000n },
+            { name: "13. Xây cầu nhỏ", value: 20000000000000000000000n },
+            { name: "14. Xây nhà tình thương", value: 50000000000000000000000n },
+            { name: "15. Cứu nạn nhân thiên tai", value: 100000000000000000000000n },
+            { name: "16. Xây trường học từ thiện", value: 200000000000000000000000n },
+            { name: "17. Mở bệnh viện miễn phí", value: 500000000000000000000000n },
+            { name: "18. Trùng tu tôn tạo chùa chiền", value: 1000000000000000000000000n },
+            { name: "19. Xây dựng ngôi chùa lớn", value: 2000000000000000000000000n },
+            { name: "20. Hoằng pháp độ sanh", value: 5000000000000000000000000n }
+        ],
+        sins: [
+            { name: "1. Nói lời cay đắng", value: 1000000000000000000n },
+            { name: "2. Ném bỏ đồ ăn", value: 5000000000000000000n },
+            { name: "3. Hại côn trùng nhỏ", value: 10000000000000000000n },
+            { name: "4. Gây gổ cãi vã", value: 20000000000000000000n },
+            { name: "5. Lừa gạt tiền bạc nhỏ", value: 50000000000000000050n },
+            { name: "6. Chặt phá cây cối", value: 100000000000000000000n },
+            { name: "7. Bất kính người lớn", value: 200000000000000000200n },
+            { name: "8. Lan truyền tin giả", value: 500000000000000000500n },
+            { name: "9. Phá hoại công cộng", value: 1000000000000000001000n },
+            { name: "10. Trộm cắp tài sản", value: 2000000000000000002000n },
+            { name: "11. Đập bể đồ vật trong nhà", value: 5000000000000000005000n },
+            { name: "12. Hành hung người khác", value: 10000000000000000010000n },
+            { name: "13. Đốt phá nhà cửa", value: 20000000000000000020000n },
+            { name: "14. Đốt kinh sách", value: 50000000000000000050000n },
+            { name: "15. Phá hoại đền chùa", value: 100000000000000000100000n },
+            { name: "16. Gây tai họa diện rộng", value: 200000000000000000200000n },
+            { name: "17. Tổ chức nhóm tội ác", value: 500000000000000000500000n },
+            { name: "18. Hủy hoại môi trường lớn", value: 1000000000000000001000000n },
+            { name: "19. Gieo rắc tư tưởng độc", value: 2000000000000000002000000n },
+            { name: "20. Tạo nghiệp cực nặng", value: 5000000000000000005000000n }
+        ]
+    };
+
+    function formatNum(n) {
+        return n.toLocaleString('en-US');
+    }
+
+    function updateUI() {
+        document.getElementById('energy-text').innerText = `${formatNum(state.energy)} / 10.000...`;
+        document.getElementById('virtue-text').innerText = `${formatNum(state.virtue)} / 10.000...`;
+
+        let ePercent = Number((state.energy * 100n) / MAX_VAL);
+        let vPercent = Number((state.virtue * 100n) / MAX_VAL);
+
+        document.getElementById('energy-fill').style.width = Math.min(ePercent, 100) + '%';
+        document.getElementById('virtue-fill').style.width = Math.min(vPercent, 100) + '%';
+
+        renderDynamicLists();
+    }
+
+    function doAction(val, isVirtue) {
+        if (isVirtue) {
+            state.virtue += val;
+            state.energy += val / 2n;
+            if (state.virtue > MAX_VAL) state.virtue = MAX_VAL;
+            if (state.energy > MAX_VAL) state.energy = MAX_VAL;
+        } else {
+            state.virtue -= val;
+            state.energy -= val / 2n;
+            if (state.virtue < 0n) state.virtue = 0n;
+            if (state.energy < 0n) state.energy = 0n;
+        }
+        updateUI();
+    }
+
+    function renderDynamicLists() {
+        let vList = document.getElementById('virtue-buttons-list');
+        vList.innerHTML = '';
+        state.virtues.forEach((v) => {
+            vList.innerHTML += `<button class="btn-virtue" style="width:100%; margin-bottom:8px; text-align:left;" onclick="doAction(${v.value}n, true)">${v.name}<br><small style="color:#10b981;">Phước: +${formatNum(v.value)}</small></button>`;
+        });
+
+        let sList = document.getElementById('sin-buttons-list');
+        sList.innerHTML = '';
+        state.sins.forEach((s) => {
+            sList.innerHTML += `<button class="btn-sin" style="width:100%; margin-bottom:8px; text-align:left;" onclick="doAction(${s.value}n, false)">${s.name}<br><small style="color:#ef4444;">Trừ: -${formatNum(s.value)}</small></button>`;
+        });
+
+        document.getElementById('guide-virtue-list').innerHTML = state.virtues.map(v => `<li>${v.name} (+${formatNum(v.value)})</li>`).join('');
+        document.getElementById('guide-sin-list').innerHTML = state.sins.map(s => `<li>${s.name} (-${formatNum(s.value)})</li>`).join('');
+
+        document.getElementById('custom-virtue-list').innerHTML = state.virtues.map((v, i) => `
+            <div class="custom-item">
+                <span style="font-size:0.85rem; font-weight:bold;">${v.name}</span>
+                <input type="text" id="cv-name-${i}" value="${v.name}">
+                <input type="text" id="cv-val-${i}" value="${v.value.toString()}">
+            </div>
+        `).join('') + `<button onclick="saveCustom(true)" style="width:100%; background:#047857; margin-top:5px;">Lưu Thay Đổi Thiện</button>`;
+
+        document.getElementById('custom-sin-list').innerHTML = state.sins.map((s, i) => `
+            <div class="custom-item">
+                <span style="font-size:0.85rem; font-weight:bold;">${s.name}</span>
+                <input type="text" id="cs-name-${i}" value="${s.name}">
+                <input type="text" id="cs-val-${i}" value="${s.value.toString()}">
+            </div>
+        `).join('') + `<button onclick="saveCustom(false)" style="width:100%; background:#b91c1c; margin-top:5px;">Lưu Thay Đổi Ác</button>`;
+    }
+
+    function saveCustom(isVirtue) {
+        try {
+            if (isVirtue) {
+                state.virtues.forEach((v, i) => {
+                    state.virtues[i].name = document.getElementById(`cv-name-${i}`).value;
+                    state.virtues[i].value = BigInt(document.getElementById(`cv-val-${i}`).value || 0);
+                });
+                alert("Đã cập nhật việc thiện!");
+            } else {
+                state.sins.forEach((s, i) => {
+                    state.sins[i].name = document.getElementById(`cs-name-${i}`).value;
+                    state.sins[i].value = BigInt(document.getElementById(`cs-val-${i}`).value || 0);
+                });
+                alert("Đã cập nhật việc ác!");
+            }
+            closeModal(isVirtue ? 'customVirtueModal' : 'customSinModal');
+            updateUI();
+        } catch (e) {
+            alert("Vui lòng kiểm tra lại giá trị số (phải là số nguyên hợp lệ)!");
+        }
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    function checkClose(e, id) { if(e.target.id === id) closeModal(id); }
+
+    function resetAll() {
+        if (confirm("Reset toàn bộ về 0?")) {
+            state.energy = 0n;
+            state.virtue = 0n;
+            updateUI();
+        }
+    }
+
+    updateUI();
+</script>
+
+</body>
+</html>
+
