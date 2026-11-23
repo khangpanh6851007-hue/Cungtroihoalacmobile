@@ -195,7 +195,69 @@
             margin-top: 5px;
             font-size: 0.9rem;
         }
-    </style>
+    
+/* ===== ULTRA 2026 UPGRADE LAYER (original styles retained) ===== */
+:root{
+ --ultra-gold:#f7d774;--ultra-cyan:#67e8f9;--ultra-violet:#a78bfa;
+ --panel:rgba(10,16,32,.82);--line:rgba(247,215,116,.22);
+}
+body{
+ background:
+  radial-gradient(ellipse at 12% 0%,rgba(59,130,246,.20),transparent 34%),
+  radial-gradient(ellipse at 88% 12%,rgba(168,85,247,.18),transparent 32%),
+  linear-gradient(135deg,#050816 0%,#101b39 48%,#210d35 100%);
+ background-attachment:fixed;
+}
+.container{max-width:1180px;padding:8px 0 34px}
+header{padding:22px 14px 18px;border:1px solid var(--line);border-radius:22px;
+ background:linear-gradient(135deg,rgba(15,23,42,.9),rgba(49,16,63,.65));
+ box-shadow:0 15px 50px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.08)}
+header h1{font-size:clamp(1.7rem,4vw,2.8rem);letter-spacing:.04em;
+ background:linear-gradient(90deg,#fff1ad,#fbbf24,#fff7cc);-webkit-background-clip:text;background-clip:text;color:transparent;
+ text-shadow:0 0 25px rgba(251,191,36,.18)}
+header p{font-size:.95rem}
+.card,.upgrade-panel{
+ background:linear-gradient(145deg,rgba(17,24,39,.94),rgba(15,23,42,.78));
+ border:1px solid rgba(255,255,255,.11);border-radius:18px;
+ box-shadow:0 12px 35px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.04);
+ backdrop-filter:blur(14px)
+}
+.tube-bar{height:23px;border-radius:20px;background:#080e1d}
+.tube-fill{border-radius:20px;box-shadow:0 0 14px currentColor}
+#energy-fill{box-shadow:0 0 16px #3b82f6}
+#virtue-fill{box-shadow:0 0 16px #10b981}
+button{border-radius:13px;min-height:46px;letter-spacing:.01em}
+button:hover{border-color:rgba(247,215,116,.55);filter:brightness(1.12)}
+.action-grid{gap:12px}
+.upgrade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
+.stat-card{padding:15px;border-radius:16px;background:linear-gradient(145deg,rgba(30,41,59,.9),rgba(15,23,42,.85));border:1px solid rgba(255,255,255,.09)}
+.stat-card small{display:block;color:#9ca3af;font-size:.75rem;margin-bottom:7px}
+.stat-card strong{font-size:clamp(1rem,2.4vw,1.45rem);color:#fef3c7;overflow-wrap:anywhere}
+.upgrade-panel{padding:16px;margin:14px 0}
+.upgrade-panel h2{margin:0 0 12px;color:var(--ultra-gold);font-size:1.05rem}
+.upgrade-actions{display:flex;flex-wrap:wrap;gap:9px}
+.upgrade-actions button{flex:1 1 150px}
+.upgrade-btn{background:linear-gradient(135deg,#4338ca,#1e3a8a)}
+.gold-btn{background:linear-gradient(135deg,#a16207,#78350f);border-color:#fbbf24}
+.cyan-btn{background:linear-gradient(135deg,#155e75,#164e63)}
+.danger-btn{background:linear-gradient(135deg,#991b1b,#450a0a)}
+.upgrade-muted{color:#9ca3af;font-size:.82rem}
+#upgrade-history{max-height:260px;overflow:auto}
+.history-row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.84rem}
+.history-row:last-child{border:0}
+.positive{color:#34d399}.negative{color:#f87171}
+.progress-track{height:9px;border-radius:20px;background:#1f2937;overflow:hidden;margin:8px 0}
+.progress-track span{display:block;height:100%;background:linear-gradient(90deg,#0ea5e9,#a78bfa,#fbbf24);border-radius:20px}
+.upgrade-input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid #475569;background:#0f172a;color:white;margin:5px 0 10px}
+.pill{display:inline-block;padding:5px 9px;border-radius:30px;background:rgba(251,191,36,.12);color:#fcd34d;border:1px solid rgba(251,191,36,.25);font-size:.72rem}
+#upgrade-toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:3000;
+ background:#111827;border:1px solid #fbbf24;border-radius:12px;padding:12px 18px;box-shadow:0 10px 35px #0008;transition:.25s;max-width:90%;text-align:center}
+#upgrade-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:720px){.upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.container{padding-left:0;padding-right:0}.upgrade-panel{padding:13px}}
+@media(min-width:900px){body{padding:24px}.action-grid{grid-template-columns:repeat(4,1fr)}.action-grid button:nth-child(3),.action-grid button:nth-child(4),.action-grid button:last-child{grid-column:span 1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+</style>
 </head>
 <body>
 
@@ -204,6 +266,50 @@
         <h1>Cung Trời Hóa Lạc</h1>
         <p>Phiên bản tối ưu cho di động</p>
     </header>
+
+
+    <section class="upgrade-grid" aria-label="Tổng quan nâng cấp">
+      <div class="stat-card"><small>👑 DANH HIỆU HIỆN TẠI</small><strong id="rank-name">Phàm Nhân</strong><div class="upgrade-muted" id="rank-next">Hành trình Thiên Giới</div></div>
+      <div class="stat-card"><small>✨ TỔNG ĐIỂM PHƯỚC</small><strong id="total-merit">0</strong><div class="upgrade-muted">Điểm thiện tích lũy</div></div>
+      <div class="stat-card"><small>📅 CHUỖI ĐIỂM DANH</small><strong id="streak-count">0 ngày</strong><div class="upgrade-muted">Chăm chỉ mỗi ngày</div></div>
+      <div class="stat-card"><small>🏆 THÀNH TỰU</small><strong id="achievement-count">0 / 6</strong><div class="upgrade-muted">Cột mốc đã mở khóa</div></div>
+    </section>
+
+    <section class="upgrade-panel">
+      <h2>🌌 HỆ THỐNG THIÊN GIỚI 2026</h2>
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap">
+        <strong id="rank-progress-label">Tiến trình tu luyện</strong><span class="pill">ULTRA EDITION</span>
+      </div>
+      <div class="progress-track"><span id="rank-progress" style="width:0%"></span></div>
+      <div class="upgrade-muted" id="rank-progress-text">Tích lũy công đức để thăng cấp danh hiệu.</div>
+    </section>
+
+    <section class="upgrade-panel">
+      <h2>🎯 NHIỆM VỤ & ĐIỂM DANH</h2>
+      <div class="upgrade-actions">
+        <button class="gold-btn" id="daily-checkin" onclick="claimDailyReward()">🎁 Điểm Danh Hôm Nay</button>
+        <button class="cyan-btn" onclick="showUpgradeAchievements()">🏆 Xem Thành Tựu</button>
+      </div>
+      <p class="upgrade-muted" id="daily-status">Điểm danh để ghi nhận ngày tu tập của bạn.</p>
+    </section>
+
+    <section class="upgrade-panel">
+      <h2>📊 THỐNG KÊ & NHẬT KÝ</h2>
+      <div class="upgrade-actions">
+        <button class="upgrade-btn" onclick="toggleUpgradeHistory()">📜 Lịch Sử Hoạt Động</button>
+        <button class="upgrade-btn" onclick="exportUpgradeData()">⬇️ Xuất Sao Lưu JSON</button>
+        <button class="upgrade-btn" onclick="document.getElementById('import-upgrade-file').click()">⬆️ Nhập Sao Lưu</button>
+        <input id="import-upgrade-file" type="file" accept="application/json,.json" style="display:none" onchange="importUpgradeData(event)">
+      </div>
+      <div id="upgrade-history" hidden style="margin-top:12px"></div>
+      <p class="upgrade-muted">Dữ liệu được lưu tự động trên thiết bị đang sử dụng. Hãy xuất sao lưu để chuyển sang thiết bị khác.</p>
+    </section>
+
+    <section class="upgrade-panel">
+      <h2>🔎 TRA CỨU NHANH</h2>
+      <input class="upgrade-input" id="action-search" type="search" placeholder="Tìm việc thiện hoặc việc ác..." oninput="filterUpgradeActions(this.value)">
+      <div class="upgrade-muted">Tìm kiếm sẽ lọc danh sách trong cửa sổ chọn việc; không thay đổi dữ liệu gốc.</div>
+    </section>
 
     <div class="card">
         <!-- Ống Năng Lượng -->
@@ -456,6 +562,180 @@
     }
 
     updateUI();
+</script>
+
+
+<script>
+/* ===== ULTRA 2026: add-on layer; original functions and lists remain available ===== */
+(function(){
+  const STORE_KEY='cungTroiHoaLac_ultra_2026';
+  const originalUpdateUI=window.updateUI;
+  const originalDoAction=window.doAction;
+  const ranks=[
+    {name:'Phàm Nhân',min:0n},{name:'Tu Sĩ',min:1000000000n},
+    {name:'Địa Tiên',min:10000000000n},{name:'Thiên Tiên',min:100000000000n},
+    {name:'Kim Tiên',min:500000000000n},{name:'Thiên Tôn',min:1500000000n},
+    {name:'Tôn Thượng',min:1500000000000n},{name:'Chí Tôn',min:5000000000000n},
+    {name:'Vô Thượng Thiên Đế',min:10000000000000n}
+  ].sort((a,b)=>a.min<b.min?-1:1);
+  let history=[];
+  let checkin={date:'',streak:0,lastDate:''};
+  let achievements={};
+  let searchTerm='';
+  let toastTimer;
+
+  function fmt(n){try{return BigInt(n).toLocaleString('vi-VN')}catch(e){return String(n)}}
+  function safeRead(){
+    try{
+      const d=JSON.parse(localStorage.getItem(STORE_KEY)||'{}');
+      if(d.energy!==undefined) state.energy=BigInt(d.energy);
+      if(d.virtue!==undefined) state.virtue=BigInt(d.virtue);
+      if(Array.isArray(d.virtues)&&d.virtues.length===20) state.virtues=d.virtues.map(x=>({name:String(x.name),value:BigInt(x.value)}));
+      if(Array.isArray(d.sins)&&d.sins.length===20) state.sins=d.sins.map(x=>({name:String(x.name),value:BigInt(x.value)}));
+      history=Array.isArray(d.history)?d.history.slice(-100):[];
+      checkin=d.checkin||checkin; achievements=d.achievements||{};
+    }catch(e){console.warn('Không thể đọc dữ liệu sao lưu:',e)}
+  }
+  function persist(){
+    try{
+      localStorage.setItem(STORE_KEY,JSON.stringify({
+        energy:state.energy.toString(),virtue:state.virtue.toString(),
+        virtues:state.virtues.map(x=>({name:x.name,value:x.value.toString()})),
+        sins:state.sins.map(x=>({name:x.name,value:x.value.toString()})),
+        history,checkin,achievements
+      }));
+    }catch(e){toast('Không thể lưu tự động. Vui lòng xuất sao lưu.')}
+  }
+  function toast(msg){
+    let el=document.getElementById('upgrade-toast');
+    if(!el){el=document.createElement('div');el.id='upgrade-toast';document.body.appendChild(el)}
+    el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>el.classList.remove('show'),2600);
+  }
+  function currentRank(){
+    let r=ranks[0],next=null;
+    for(let i=0;i<ranks.length;i++){if(state.virtue>=ranks[i].min)r=ranks[i];else{next=ranks[i];break}}
+    return {r,next};
+  }
+  function renderDashboard(){
+    const {r,next}=currentRank();
+    const total=state.virtue;
+    document.getElementById('rank-name').textContent=r.name;
+    document.getElementById('rank-next').textContent=next?'Mục tiêu: '+next.name:'Đã đạt cảnh giới tối cao';
+    document.getElementById('total-merit').textContent=fmt(total);
+    document.getElementById('streak-count').textContent=(checkin.streak||0)+' ngày';
+    const unlocked=Object.values(achievements).filter(Boolean).length;
+    document.getElementById('achievement-count').textContent=unlocked+' / 6';
+    let pct=next?Number(((total-r.min)*100n)/(next.min-r.min)):100;
+    pct=Math.max(0,Math.min(100,pct));
+    document.getElementById('rank-progress').style.width=pct+'%';
+    document.getElementById('rank-progress-label').textContent='Cảnh giới: '+r.name;
+    document.getElementById('rank-progress-text').textContent=next?fmt(total-r.min)+' / '+fmt(next.min-r.min)+' điểm đến '+next.name:'Bạn đã đạt cảnh giới cao nhất.';
+    const today=new Date().toLocaleDateString('en-CA');
+    const claimed=checkin.date===today;
+    document.getElementById('daily-checkin').disabled=claimed;
+    document.getElementById('daily-checkin').style.opacity=claimed?'.55':'1';
+    document.getElementById('daily-status').textContent=claimed?'Bạn đã điểm danh hôm nay. Hẹn gặp lại ngày mai.':'Phần thưởng: +100.000.000 điểm phước và +50.000.000 năng lượng.';
+  }
+  function logAction(label,amount,isGood){
+    history.push({time:new Date().toLocaleString('vi-VN'),label,amount:amount.toString(),good:isGood});
+    if(history.length>100)history=history.slice(-100);
+  }
+  window.updateUI=function(){
+    originalUpdateUI();
+    renderDashboard();persist();
+  };
+  window.doAction=function(val,isVirtue){
+    const before=state.virtue;
+    originalDoAction(val,isVirtue);
+    const delta=state.virtue-before;
+    logAction(isVirtue?'Việc thiện':'Việc ác',delta,isVirtue);
+    checkAchievements();persist();renderDashboard();
+  };
+  window.claimDailyReward=function(){
+    const today=new Date().toLocaleDateString('en-CA');
+    if(checkin.date===today){toast('Bạn đã điểm danh hôm nay rồi!');return}
+    const yesterday=new Date(Date.now()-86400000).toLocaleDateString('en-CA');
+    checkin.streak=checkin.lastDate===yesterday?(checkin.streak||0)+1:1;
+    checkin.lastDate=today;checkin.date=today;
+    state.virtue+=100000000n;state.energy+=50000000n;
+    if(state.virtue>MAX_VAL)state.virtue=MAX_VAL;if(state.energy>MAX_VAL)state.energy=MAX_VAL;
+    logAction('Điểm danh hằng ngày',100000000n,true);
+    updateUI();toast('Điểm danh thành công! +100.000.000 phước đức');
+  };
+  function checkAchievements(){
+    const tests={
+      firstGood:state.virtue>=1n,
+      merit1B:state.virtue>=1000000000n,
+      merit1T:state.virtue>=1000000000000n,
+      energyHalf:state.energy>=MAX_VAL/2n,
+      tenActions:history.length>=10,
+      sevenDays:(checkin.streak||0)>=7
+    };
+    Object.keys(tests).forEach(k=>{if(tests[k])achievements[k]=true});
+  }
+  window.showUpgradeAchievements=function(){
+    const names=[
+      ['firstGood','🌱 Bước Chân Thiện Lành','Tích lũy điểm phước lần đầu'],
+      ['merit1B','✨ Công Đức Sơ Thành','Đạt 1 tỷ điểm phước'],
+      ['merit1T','💎 Tích Lũy Đại Công Đức','Đạt 1 nghìn tỷ điểm phước'],
+      ['energyHalf','⚡ Năng Lượng Dồi Dào','Đạt 50% năng lượng tối đa'],
+      ['tenActions','📜 Người Tu Tập Chăm Chỉ','Ghi nhận 10 hoạt động'],
+      ['sevenDays','🔥 Kiên Trì Bảy Ngày','Điểm danh liên tục 7 ngày']
+    ];
+    alert('THÀNH TỰU THIÊN GIỚI\\n\\n'+names.map(([k,n,d])=>(achievements[k]?'✅ ':'🔒 ')+n+'\\n'+d).join('\\n\\n'));
+  };
+  window.toggleUpgradeHistory=function(){
+    const el=document.getElementById('upgrade-history');el.hidden=!el.hidden;
+    if(!el.hidden){
+      el.innerHTML=history.length?history.slice().reverse().map(x=>`<div class="history-row"><span>${escapeHtml(x.label)}<br><small class="upgrade-muted">${escapeHtml(x.time)}</small></span><strong class="${x.good?'positive':'negative'}">${x.good?'+':'−'}${fmt(x.amount)}</strong></div>`).join(''):'<p class="upgrade-muted">Chưa có hoạt động nào được ghi nhận.</p>';
+    }
+  };
+  function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+  window.exportUpgradeData=function(){
+    persist();
+    const data=localStorage.getItem(STORE_KEY)||'{}';
+    const blob=new Blob([data],{type:'application/json'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download='cung-troi-hoa-lac-sao-luu-2026.json';a.click();URL.revokeObjectURL(url);
+    toast('Đã tạo file sao lưu dữ liệu.');
+  };
+  window.importUpgradeData=function(event){
+    const file=event.target.files&&event.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=function(){
+      try{
+        const d=JSON.parse(reader.result);
+        if(d.energy===undefined||d.virtue===undefined)throw new Error('invalid');
+        localStorage.setItem(STORE_KEY,JSON.stringify(d));safeRead();updateUI();toast('Nhập dữ liệu thành công!');
+      }catch(e){alert('File sao lưu không hợp lệ.')}
+      event.target.value='';
+    };reader.readAsText(file);
+  };
+  window.filterUpgradeActions=function(term){
+    searchTerm=String(term||'').toLocaleLowerCase('vi');
+    const filter=(selector)=>document.querySelectorAll(selector+' button').forEach(b=>{
+      b.style.display=b.textContent.toLocaleLowerCase('vi').includes(searchTerm)?'':'none';
+    });
+    filter('#virtue-buttons-list');filter('#sin-buttons-list');
+    if(!searchTerm){document.querySelectorAll('#virtue-buttons-list button,#sin-buttons-list button').forEach(b=>b.style.display='')}
+    if(!document.getElementById('virtueModal').style.display||document.getElementById('virtueModal').style.display==='none')openModal('virtueModal');
+  };
+  // Add a visible version marker without changing the original title or functions.
+  const version=document.createElement('div');
+  version.className='upgrade-muted';version.style.textAlign='center';version.style.margin='10px 0 18px';
+  version.innerHTML='<span class="pill">PHIÊN BẢN ĐẠI NÂNG CẤP 2026</span> · Dữ liệu lưu trên thiết bị';
+  document.querySelector('header').appendChild(version);
+
+  safeRead();
+  const oldReset=window.resetAll;
+  window.resetAll=function(){
+    oldReset();
+    if(state.energy===0n&&state.virtue===0n){history=[];checkin={date:'',streak:0,lastDate:''};achievements={};persist();renderDashboard();toast('Đã đặt lại dữ liệu trò chơi.')}
+  };
+  // Ensure original lists reflect saved custom entries and the upgraded counters.
+  updateUI();
+})();
 </script>
 
 </body>
